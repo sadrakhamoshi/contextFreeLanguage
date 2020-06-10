@@ -1,0 +1,6 @@
+5
+<START>-><SUBJECT><DISTANCE><VERB><DISTANCE><OBJECTS>
+<SUBJECT>->i|we
+<VERB>->eat|drink |go
+<OBJECTS>->food|water|lamda
+<DISTANCE>->space
