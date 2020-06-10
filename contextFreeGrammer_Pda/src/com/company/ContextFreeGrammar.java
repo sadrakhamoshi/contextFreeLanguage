@@ -9,10 +9,10 @@ public class ContextFreeGrammar {
     private boolean isDeleteTrash;
     private boolean isGreibachNormalForm;
 
+    public String initialize;
     private Integer variableNum;
     private List<String> terminals;
-    public Hashtable<String, Variable> transitions;
-    public String initialize;
+    public Hashtable<String, List<Rules>> transitions;
 
     public ContextFreeGrammar() {
         transitions = new Hashtable<>();
