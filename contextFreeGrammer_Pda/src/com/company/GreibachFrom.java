@@ -1,5 +1,5 @@
 package com.company;
 
-public class GreibachFrom {
+public class GreibachFrom extends ContextFreeGrammar {
 
 }
