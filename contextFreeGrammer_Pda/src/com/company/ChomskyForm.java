@@ -1,4 +1,4 @@
 package com.company;
 
-public class ChomskyForm {
+public class ChomskyForm extends ContextFreeGrammar {
 }
