@@ -10,24 +10,11 @@ public class GetInput {
         grammar.setVariableNum(scanner.nextInt());
         boolean getInput = true;
         for (int i = 0; i < grammar.getVariableNum(); i++) {
-            String[] tmp = scanner1.nextLine().split("->");
-            String var = tmp[0];
-            grammar.initialize = var;
-            if (!grammar.transitions.containsKey(var)) {
-                grammar.transitions.put(var, new Variable(var));
-            }
+            String input=scanner1.nextLine();
+            String splitedByFlash[]=input.split("->");
+            String variable=splitedByFlash[0];
+            String transition=splitedByFlash[1];
 
-            String[] transition=tmp[1].split("[\\|\\s+]");
-
-            for (int j = 0; j < transition.length; j++) {
-                if(transition[j].length()!=0){
-                    if(!transition[j].contains("<")){
-                        grammar.setTerminals(transition[i]);
-                        grammar.transitions.get(var).setTerminals(transition[j]);
-                    }
-                    
-                }
-            }
 
         }
     }
