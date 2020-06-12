@@ -9,6 +9,10 @@ public class DeleteTrash {
     public boolean unitTrash;
     public boolean uselessTrash;
 
+    public DeleteTrash() {
+        nullTrash = unitTrash = uselessTrash = false;
+    }
+
 
     public void checkForNullTrash(ContextFreeGrammar grammar) {
         grammar.transitions.forEach((key, value) -> {
@@ -34,7 +38,7 @@ public class DeleteTrash {
                         for (int j = 0; j < v.get(i).pairs.size(); j++) {
                             if (v.get(i).pairs.get(j).member.equals(key)) {
                                 v.get(i).pairs.remove(j);
-                                v.get(i).name=v.get(i).name.replace("<" + key + ">", "");
+                                v.get(i).name = v.get(i).name.replace("<" + key + ">", "");
                             }
                         }
                     } else {
@@ -55,9 +59,63 @@ public class DeleteTrash {
 
     public void checkForUnitTrash(ContextFreeGrammar grammar) {
 
+        grammar.transitions.forEach((key, rules) -> {
+            for (int i = 0; i < rules.size(); i++) {
+                if (rules.get(i).pairs.size() == 1) {
+                    if (rules.get(i).pairs.get(0).type == Rules.VARIABLE) {
+                        unitTrash = true;
+                        DeleteUnitTrash(grammar, key, i, rules.get(i).pairs.get(0).member);
+                    }
+                }
+            }
+        });
+    }
+
+    private void DeleteUnitTrash(ContextFreeGrammar grammar, String key, int idx, String unitName) {
+        grammar.transitions.get(key).remove(idx);
+        grammar.transitions.forEach((k, rules) -> {
+
+            Integer size = rules.size();
+            //each rule
+            for (int i = 0; i < rules.size(); i++) {
+                if (rules.get(i).name.contains(key)) {
+
+                    if (grammar.transitions.get(key).size() != 0) {
+                        Rules rules1 = new Rules(rules.get(i).name.replace(key, unitName));
+                        for (Pair p :
+                                rules.get(i).pairs) {
+                            //not unit
+                            if (!p.member.equals(key)) {
+                                rules1.pairs.add(new Pair(p.member, p.type));
+                            }
+                            //unit parameter
+                            else {
+                                rules1.pairs.add(new Pair(unitName, p.type));
+                            }
+                        }
+                        rules.add(rules1);
+                    }
+                    //only has one transition
+                    else {
+                        if (rules.get(i).pairs.size() == 1 && k.equals(unitName)) {
+                            rules.remove(i);
+                        } else {
+                            rules.get(i).name = rules.get(i).name.replace(key, unitName);
+                            for (Pair p :
+                                    rules.get(i).pairs) {
+                                if (p.member.equals(key)) {
+                                    p.member = unitName;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        });
     }
 
     public void checkForUselessTrash(ContextFreeGrammar grammar) {
+
 
     }
 }

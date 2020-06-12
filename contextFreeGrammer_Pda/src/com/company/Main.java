@@ -9,6 +9,6 @@ public class Main {
         ContextFreeGrammar grammar = new ContextFreeGrammar();
         GetInput.setGrammarFromInput(grammar);
         DeleteTrash trash=new DeleteTrash();
-        trash.checkForNullTrash(grammar);
+        trash.checkForUnitTrash(grammar);
     }
 }
