@@ -25,7 +25,7 @@ public class GetInput {
                     if (str.length() != 0) {
                         current = str;
 
-                        if (current.equals("START"))
+                        if (current.equals(new String("START")))
                             grammar.initialize = current;
 
                         if (!grammar.transitions.containsKey(str)) {
