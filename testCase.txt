@@ -4,3 +4,24 @@
 <VERB>->eat|drink |go
 <OBJECTS>->food|water|lamda
 <DISTANCE>->space
+
+3
+<START>-><SUBJECT>we<SADRA>
+<SUBJECT>->we<SADRA>|<SADRA>mn
+<SADRA>->lamda|food
+
+3
+<START>-><SUBJECT>we<SADRA>
+<SUBJECT>->we<SADRA>|<SADRA>mn
+<SADRA>->lamda
+
+3
+<START>-><SUBJECT>we<SADRA>
+<SUBJECT>->we<SADRA>|<SADRA>mn|lamda
+<SADRA>->lamda|food
+
+
+3
+<START>-><SUBJECT>we<SADRA>
+<SUBJECT>->we<SADRA>|<SADRA>mn|lamda
+<SADRA>->lamda

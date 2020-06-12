@@ -8,6 +8,9 @@ public class Main {
         // write your code here
         ContextFreeGrammar grammar = new ContextFreeGrammar();
         GetInput.setGrammarFromInput(grammar);
+      
+        DeleteTrash trash=new DeleteTrash();
+        trash.checkForNullTrash(grammar);
 
         grammar.transitions.forEach((k, rules) -> {
             System.out.print(k + " -> ");
