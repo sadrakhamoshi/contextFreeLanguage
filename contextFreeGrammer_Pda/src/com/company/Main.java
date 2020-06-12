@@ -13,7 +13,7 @@ public class Main {
 
         trash.checkForUnitTrash(grammar);
 
-        trash.checkForNullTrash(grammar);
+
 
         grammar.transitions.forEach((k, rules) -> {
             System.out.print(k + " -> ");
