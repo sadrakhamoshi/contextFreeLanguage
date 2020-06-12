@@ -62,12 +62,15 @@ public class DeleteTrash {
     public void checkForUnitTrash(ContextFreeGrammar grammar) {
 
         grammar.transitions.forEach((key, rules) -> {
+
             Integer size = rules.size();
-            for (int i = 0; i < size; i++) {
+            for (int i = 0; i < rules.size(); i++) {
+
                 if (rules.get(i).pairs.size() == 1) {
                     if (rules.get(i).pairs.get(0).type == Rules.VARIABLE) {
                         unitTrash = true;
                         DeleteUnitTrash(grammar, key, i, rules.get(i).pairs.get(0).member);
+                        i--;
                     }
                 }
             }
@@ -86,7 +89,7 @@ public class DeleteTrash {
                     if (grammar.transitions.get(key).size() != 0) {
 
                         if (rules.get(i).pairs.size() == 1 && k.equals(unitName)) {
-
+                            //do nothing
                         } else {
                             Rules rules1 = new Rules(rules.get(i).name.replace(key, unitName));
                             for (Pair p :
