@@ -1,5 +1,7 @@
 package com.company;
 
+import jdk.jshell.spi.ExecutionControl;
+
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
@@ -62,4 +64,27 @@ public class ContextFreeGrammar {
 
 
     //method isGeneratedByGrammar
+
+    public boolean isGeneratedByGrammar(String input, ContextFreeGrammar grammar) {
+
+        boolean result;
+
+        if (grammar.isChomskyForm) {
+            result = DpCheck(input, grammar);
+        } else {
+            result = notDpCheck(input, grammar);
+        }
+        return result;
+    }
+
+    private boolean DpCheck(String input, ContextFreeGrammar grammar) {
+        return false;
+    }
+
+    private boolean notDpCheck(String input, ContextFreeGrammar grammar) {
+        for (int i = 0; i < input.length(); i++) {
+
+        }
+        return false;
+    }
 }
