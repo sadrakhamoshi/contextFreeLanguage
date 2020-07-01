@@ -35,24 +35,35 @@ public class DeleteTrash {
             for (int i = 0; i < size; i++) {
 
                 if (v.get(i).name.contains(key)) {
+
                     //key has only lambda transition
                     if (grammar.transitions.get(key).size() == 0) {
-                        for (int j = 0; j < v.get(i).pairs.size(); j++) {
-                            if (v.get(i).pairs.get(j).member.equals(key)) {
-                                v.get(i).pairs.remove(j);
-                                v.get(i).name = v.get(i).name.replace("<" + key + ">", "");
+
+                        if (v.get(i).pairs.size() == 1) {
+                            v.remove(i);
+                        } else {
+                            for (int j = 0; j < v.get(i).pairs.size(); j++) {
+                                if (v.get(i).pairs.get(j).member.equals(key)) {
+                                    v.get(i).pairs.remove(j);
+                                    v.get(i).name = v.get(i).name.replace("<" + key + ">", "");
+                                }
                             }
                         }
                     } else {
-                        Rules rules = new Rules(v.get(i).name.replace("<" + key + ">", ""));
-                        for (Pair p :
-                                v.get(i).pairs) {
-                            if (!p.member.equals(key)) {
-                                Pair tmp = new Pair(p.member, p.type);
-                                rules.pairs.add(tmp);
+
+                        if (v.get(i).pairs.size() == 1) {
+                            //do nothing
+                        } else {
+                            Rules rules = new Rules(v.get(i).name.replace("<" + key + ">", ""));
+                            for (Pair p :
+                                    v.get(i).pairs) {
+                                if (!p.member.equals(key)) {
+                                    Pair tmp = new Pair(p.member, p.type);
+                                    rules.pairs.add(tmp);
+                                }
                             }
+                            v.add(rules);
                         }
-                        v.add(rules);
                     }
                 }
             }

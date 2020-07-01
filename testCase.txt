@@ -42,5 +42,10 @@
 4
 <START>-><SUBJECT>we<SADRA>|me
 <SUBJECT>->ssss|<SADRA>mn
-<SADRA>-><SUBJECT>|food
+<SADRA>-><SUBJECT>|food|<DDD>
 <DDD>-><SADRA>
+
+
+2
+<START>-><A><START>|<A><A>a<START>
+<A>->aa|<START><A>
