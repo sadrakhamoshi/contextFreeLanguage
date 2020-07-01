@@ -106,8 +106,8 @@ public class ContextFreeGrammar {
             for (int column = 0; column < length - row; column++) {
 
                 int k = column;
-                for (int i = 0; i < row - 1; i++) {
-                    if (table[i][column].size() == 0 || table[row - 1 - i][column + 1 + i].size() == 0) {
+                for (int i = 0; i < row ; i++) {
+                    if (table[i][column] == null || table[row - 1 - i][column + 1 + i]==null) {
                         continue;
                     } else {
                         for (int j = 0; j < table[i][column].size(); j++) {
@@ -134,8 +134,8 @@ public class ContextFreeGrammar {
                 }
             }
         }
-        for (int i = 0; i < table[0][length - 1].size(); i++) {
-            if (table[0][length - 1].get(i).contains(grammar.initialize))
+        for (int i = 0; i < table[length - 1][0].size(); i++) {
+            if (table[length - 1][0].get(i).equals(grammar.initialize))
                 return true;
         }
         return false;
