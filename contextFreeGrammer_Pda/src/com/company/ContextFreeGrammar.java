@@ -67,24 +67,89 @@ public class ContextFreeGrammar {
 
     public boolean isGeneratedByGrammar(String input, ContextFreeGrammar grammar) {
 
-        boolean result;
-
-        if (grammar.isChomskyForm) {
-            result = DpCheck(input, grammar);
-        } else {
-            result = notDpCheck(input, grammar);
+        ChomskyForm c = new ChomskyForm();
+        c.isChomskyNormalForm(grammar);
+        if (!c.isChomskyForm) {
+            String t = c.convertToChomsky(grammar);
         }
+
+        Boolean result = CYK_Algoorithm(input, grammar);
         return result;
     }
 
-    private boolean DpCheck(String input, ContextFreeGrammar grammar) {
-        return false;
-    }
+    private Boolean CYK_Algoorithm(String input, ContextFreeGrammar grammar) {
+        String[] inputs = input.split(":");
+        Integer length = inputs.length;
 
-    private boolean notDpCheck(String input, ContextFreeGrammar grammar) {
-        for (int i = 0; i < input.length(); i++) {
+        List<String>[][] table = new List[length][length];
 
+
+        grammar.transitions.forEach((key, rules) -> {
+
+            for (int i = 0; i < length; i++) {
+                String tmp = inputs[i];
+                for (int j = 0; j < rules.size(); j++) {
+                    if (rules.get(j).name.contains(tmp)) {
+                        if (table[0][i] == null)
+                            table[0][i] = new ArrayList<>();
+                        if (!table[0][i].contains(key))
+                            table[0][i].add(key);
+                        break;
+                    }
+                }
+            }
+        });
+
+
+        for (int row = 1; row < length; row++) {
+
+            for (int column = 0; column < length - row; column++) {
+
+                int k = column;
+                for (int i = 0; i < row - 1; i++) {
+                    if (table[i][column].size() == 0 || table[row - 1 - i][column + 1 + i].size() == 0) {
+                        continue;
+                    } else {
+                        for (int j = 0; j < table[i][column].size(); j++) {
+                            for (int l = 0; l < table[row - i - 1][column + i + 1].size(); l++) {
+                                String tmp = "<" + table[i][column].get(j) + ">" + "<" + table[row - i - 1][column + i + 1].get(l) + ">";
+
+                                int finalColumn = column;
+                                int finalRow = row;
+
+                                grammar.transitions.forEach((key, rules) -> {
+
+                                    for (int m = 0; m < rules.size(); m++) {
+                                        if (rules.get(m).name.contains(tmp)) {
+                                            if (table[finalRow][finalColumn] == null)
+                                                table[finalRow][finalColumn] = new ArrayList<>();
+                                            table[finalRow][finalColumn].add(key);
+                                            break;
+                                        }
+                                    }
+                                });
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        for (int i = 0; i < table[0][length - 1].size(); i++) {
+            if (table[0][length - 1].get(i).contains(grammar.initialize))
+                return true;
         }
         return false;
     }
+
 }
+//    int k = j;
+//                    for (int i = 0; i < row - 1; i++) {
+//
+//        if (table[i][k].size() == 0 || table[j - i + 1][column + i + 1].size() == 0)
+//        }
+//for (int j = column; j < length - 1 - row; j++) {
+//
+//        for (int i = 0; i < row - 1; i++) {
+//        if(table[i][j].size()==0||table[row-1-i][j+i].size()==0)
+//        }
+//        }
