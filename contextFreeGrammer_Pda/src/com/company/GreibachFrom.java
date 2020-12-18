@@ -16,7 +16,7 @@ public class GreibachFrom extends ContextFreeGrammar {
         Boolean result = isGreibach(grammar);
     }
 
-    private Boolean isGreibach(ContextFreeGrammar grammar) {
+    public Boolean isGreibach(ContextFreeGrammar grammar) {
 
         Iterator<List<Rules>> rules=grammar.transitions.values().iterator();
 

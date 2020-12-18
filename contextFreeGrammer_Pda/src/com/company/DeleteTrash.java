@@ -27,7 +27,7 @@ public class DeleteTrash {
         });
     }
 
-    private void DeleteLambda(ContextFreeGrammar grammar, String key, int idx) {
+    public void DeleteLambda(ContextFreeGrammar grammar, String key, int idx) {
         grammar.transitions.get(key).remove(idx);
         grammar.transitions.forEach((k, v) -> {
             //through the one variable
@@ -88,7 +88,7 @@ public class DeleteTrash {
         });
     }
 
-    private void DeleteUnitTrash(ContextFreeGrammar grammar, String key, int idx, String unitName) {
+    public void DeleteUnitTrash(ContextFreeGrammar grammar, String key, int idx, String unitName) {
         grammar.transitions.get(key).remove(idx);
         grammar.transitions.forEach((k, rules) -> {
 
