@@ -1,1 +1,1 @@
-This is the project for Chomsky normal form and greibach normal form .
+This project is based on Chomsky Normal Form and Greibach Normal Form .
